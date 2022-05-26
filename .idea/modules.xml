@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SolarSystem.iml" filepath="$PROJECT_DIR$/.idea/modules/SolarSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SolarSystem.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SolarSystem.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SolarSystem.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SolarSystem.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SolarSystem.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SolarSystem.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SolarSystem.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SolarSystem.app.unitTest.iml" />
+    </modules>
+  </component>
+</project>
