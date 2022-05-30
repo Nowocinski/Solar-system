@@ -1,16 +1,16 @@
-package com.example.solarsystem.ui.home;
+package com.example.solarsystem.ui.moons;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class MoonsViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public MoonsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("This is moons fragment");
     }
 
     public LiveData<String> getText() {

@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_planets"
-        android:name="com.example.solarsystem.ui.home.HomeFragment"
+        android:name="com.example.solarsystem.ui.planets.PlanetsFragment"
         android:label="@string/menu_planets"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_planets" />
 
     <fragment
         android:id="@+id/nav_moons"
-        android:name="com.example.solarsystem.ui.gallery.GalleryFragment"
+        android:name="com.example.solarsystem.ui.moons.MoonsFragment"
         android:label="@string/menu_moons"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_moons" />
 
     <fragment
         android:id="@+id/nav_other"
-        android:name="com.example.solarsystem.ui.slideshow.SlideshowFragment"
+        android:name="com.example.solarsystem.ui.other.OtherFragment"
         android:label="@string/menu_other"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_other" />
 </navigation>

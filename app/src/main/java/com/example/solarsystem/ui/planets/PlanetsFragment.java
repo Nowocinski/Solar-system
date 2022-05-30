@@ -1,4 +1,4 @@
-package com.example.solarsystem.ui.slideshow;
+package com.example.solarsystem.ui.planets;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,22 +9,22 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.example.solarsystem.databinding.FragmentSlideshowBinding;
+import com.example.solarsystem.databinding.FragmentPlanetsBinding;
 
-public class SlideshowFragment extends Fragment {
+public class PlanetsFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentPlanetsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(SlideshowViewModel.class);
+        PlanetsViewModel homeViewModel =
+                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(PlanetsViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentPlanetsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textHome;
+        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

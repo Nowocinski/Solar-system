@@ -1,4 +1,4 @@
-package com.example.solarsystem.ui.gallery;
+package com.example.solarsystem.ui.moons;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,18 +9,18 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.example.solarsystem.databinding.FragmentGalleryBinding;
+import com.example.solarsystem.databinding.FragmentMoonsBinding;
 
-public class GalleryFragment extends Fragment {
+public class MoonsFragment extends Fragment {
 
-    private FragmentGalleryBinding binding;
+    private FragmentMoonsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        GalleryViewModel galleryViewModel =
-                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(GalleryViewModel.class);
+        MoonsViewModel galleryViewModel =
+                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MoonsViewModel.class);
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentMoonsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textGallery;
