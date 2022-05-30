@@ -6,7 +6,7 @@ import android.arch.lifecycle.ViewModel;
 
 public class PlanetsViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private MutableLiveData<String> mText;
 
     public PlanetsViewModel() {
         mText = new MutableLiveData<>();
@@ -15,5 +15,9 @@ public class PlanetsViewModel extends ViewModel {
 
     public LiveData<String> getText() {
         return mText;
+    }
+
+    public void setText(String text) {
+        this.mText.setValue(this.mText.getValue() + " " + text);
     }
 }

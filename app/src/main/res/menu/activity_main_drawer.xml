@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_planet"
             android:title="@string/menu_planets" />
         <item
+            android:id="@+id/nav_sunshine"
+            android:icon="@drawable/ic_sunshine"
+            android:title="@string/menu_sunshine" />
+        <item
             android:id="@+id/nav_moons"
             android:icon="@drawable/ic_moon"
             android:title="@string/menu_moons" />

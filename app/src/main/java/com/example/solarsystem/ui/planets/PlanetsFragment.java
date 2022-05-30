@@ -17,14 +17,15 @@ public class PlanetsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        PlanetsViewModel homeViewModel =
+        PlanetsViewModel planetsViewModel =
                 new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(PlanetsViewModel.class);
 
         binding = FragmentPlanetsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        planetsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        planetsViewModel.setText("test");
         return root;
     }
 

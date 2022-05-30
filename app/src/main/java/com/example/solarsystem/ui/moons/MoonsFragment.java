@@ -17,14 +17,14 @@ public class MoonsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        MoonsViewModel galleryViewModel =
+        MoonsViewModel moonsViewModel =
                 new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MoonsViewModel.class);
 
         binding = FragmentMoonsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textGallery;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textMoons;
+        moonsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
