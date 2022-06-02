@@ -20,7 +20,7 @@ import com.example.solarsystem.databinding.FragmentPlanetsBinding;
 
 import butterknife.BindView;
 
-public class PlanetsFragment extends Fragment {
+public class PlanetsFragment extends Fragment implements SolarObjectsAdapter.ISolarObjectClickedListener {
     private final String LOG_KEY = "LOG_KEY@" + this.getClass().getSimpleName();
     public static final String OBJECT_KEY = "planets";
     private FragmentPlanetsBinding binding;
@@ -50,6 +50,13 @@ public class PlanetsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         SolarObject[] objects = SolarObject.loadArrayFromJSON(getContext(), this.OBJECT_KEY);
         this.binding.objectsRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        this.binding.objectsRecyclerView.setAdapter(new SolarObjectsAdapter(objects));
+        SolarObjectsAdapter adapter = new SolarObjectsAdapter(objects);
+        adapter.setSolarObjectClickedListener(this);
+        this.binding.objectsRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void solarObjectClicked(SolarObject solarObject) {
+        Log.d(this.LOG_KEY, "Clicked: " + solarObject.getName());
     }
 }

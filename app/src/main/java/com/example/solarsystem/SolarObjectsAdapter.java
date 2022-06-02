@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 
 public class SolarObjectsAdapter extends RecyclerView.Adapter<SolarObjectsAdapter.SolarObjectsViewHolder>{
     private final SolarObject[] solarObjects;
+    private ISolarObjectClickedListener solarObjectClickedListener;
 
     public SolarObjectsAdapter(SolarObject[] solarObjects) {
         this.solarObjects = solarObjects;
@@ -40,7 +41,17 @@ public class SolarObjectsAdapter extends RecyclerView.Adapter<SolarObjectsAdapte
         holder.setSolarObject(solarObject);
     }
 
-    class SolarObjectsViewHolder extends RecyclerView.ViewHolder {
+    private void itemClick(SolarObject solarObject) {
+        if (this.solarObjectClickedListener != null) {
+            this.solarObjectClickedListener.solarObjectClicked(solarObject);
+        }
+    }
+
+    public void setSolarObjectClickedListener(ISolarObjectClickedListener solarObjectClickedListener) {
+        this.solarObjectClickedListener = solarObjectClickedListener;
+    }
+
+    class SolarObjectsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final String LOG_KEY = "LOG_KEY@" + this.getClass().getSimpleName();
         @BindView(R.id.itemImageView)
         ImageView itemImageView;
@@ -52,6 +63,7 @@ public class SolarObjectsAdapter extends RecyclerView.Adapter<SolarObjectsAdapte
         public SolarObjectsViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
         }
 
         public void setSolarObject(SolarObject solarObject) {
@@ -65,5 +77,14 @@ public class SolarObjectsAdapter extends RecyclerView.Adapter<SolarObjectsAdapte
         public SolarObject getSolarObject() {
             return solarObject;
         }
+
+        @Override
+        public void onClick(View v) {
+            itemClick(solarObject);
+        }
+    }
+
+    public interface ISolarObjectClickedListener {
+        void solarObjectClicked(SolarObject solarObject);
     }
 }
