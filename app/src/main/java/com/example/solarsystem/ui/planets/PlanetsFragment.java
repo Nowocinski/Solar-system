@@ -1,25 +1,20 @@
 package com.example.solarsystem.ui.planets;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.solarsystem.SolarObject;
 import com.example.solarsystem.SolarObjectsAdapter;
 import com.example.solarsystem.databinding.FragmentPlanetsBinding;
-import com.example.solarsystem.ui.moons.MoonsFragment;
-
-import butterknife.BindView;
 
 public class PlanetsFragment extends Fragment implements SolarObjectsAdapter.ISolarObjectClickedListener {
     private final String LOG_KEY = "LOG_KEY@" + this.getClass().getSimpleName();
