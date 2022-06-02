@@ -9,21 +9,21 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.example.solarsystem.databinding.FragmentOtherBinding;
+import com.example.solarsystem.databinding.FragmentPlanetsBinding;
 
 public class OtherFragment extends Fragment {
 
-    private FragmentOtherBinding binding;
+    private FragmentPlanetsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         OtherViewModel otherViewModel =
                 new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(OtherViewModel.class);
 
-        binding = FragmentOtherBinding.inflate(inflater, container, false);
+        binding = FragmentPlanetsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
+        final TextView textView = binding.textHome;
         otherViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }

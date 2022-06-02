@@ -21,7 +21,7 @@
         android:id="@+id/nav_other"
         android:name="com.example.solarsystem.ui.other.OtherFragment"
         android:label="@string/menu_other"
-        tools:layout="@layout/fragment_other" />
+        tools:layout="@layout/fragment_planets" />
 
     <fragment
         android:id="@+id/nav_sunshine"
