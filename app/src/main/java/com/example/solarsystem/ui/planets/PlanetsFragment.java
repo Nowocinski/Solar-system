@@ -1,15 +1,15 @@
 package com.example.solarsystem.ui.planets;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
+import androidx.annotation.Nullable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.arch.lifecycle.ViewModelProvider;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.solarsystem.SolarObject;
 import com.example.solarsystem.databinding.FragmentPlanetsBinding;
@@ -26,9 +26,9 @@ public class PlanetsFragment extends Fragment {
         binding = FragmentPlanetsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        planetsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        planetsViewModel.setText("test");
+        //final TextView textView = binding.textHome;
+        //planetsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        //planetsViewModel.setText("test");
         return root;
     }
 
