@@ -42,9 +42,5 @@ public class PlanetsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         SolarObject[] objects = SolarObject.loadArrayFromJSON(getContext(),"planets");
-
-        for (SolarObject object : objects) {
-            Log.d(this.LOG_KEY, object.getVideo());
-        }
     }
 }

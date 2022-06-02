@@ -23,7 +23,9 @@ public class SolarObject implements Serializable {
         this.text = String.format("texts/earth.txt", this.name.toLowerCase())/*String.format("texts/%s.txt", name.toLowerCase())*/;
         this.image = String.format("images/%s.jpg", name.toLowerCase());
         this.video = jsonObject.optString("video");
-        this.moons = null;
+        if (jsonObject.optJSONArray("moons") != null) {
+            this.moons = getSolarObjectFromJSONArray(jsonObject.optJSONArray("moons"));
+        }
     }
 
     public SolarObject[] getMoons() {
@@ -84,12 +86,7 @@ public class SolarObject implements Serializable {
             String json = loadStringFromAssets(context, "solar.json");
             JSONObject jsonObject = new JSONObject(json);
             JSONArray jsonArray = jsonObject.getJSONArray(type);
-            SolarObject[] solarObjects = new SolarObject[jsonArray.length()];
-            for (int i = 0; i < jsonArray.length(); i++) {
-                SolarObject solarObject = new SolarObject(jsonArray.getJSONObject(i));
-                solarObjects[i] = solarObject;
-            }
-            return solarObjects;
+            return getSolarObjectFromJSONArray(jsonArray);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -97,5 +94,14 @@ public class SolarObject implements Serializable {
         }
 
         return new SolarObject[0];
+    }
+
+    private static SolarObject[] getSolarObjectFromJSONArray(JSONArray jsonArray) throws JSONException {
+        SolarObject[] solarObjects = new SolarObject[jsonArray.length()];
+        for (int i = 0; i < jsonArray.length(); i++) {
+            SolarObject solarObject = new SolarObject(jsonArray.getJSONObject(i));
+            solarObjects[i] = solarObject;
+        }
+        return solarObjects;
     }
 }
