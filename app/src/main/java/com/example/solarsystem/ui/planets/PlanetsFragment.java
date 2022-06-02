@@ -17,12 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.solarsystem.SolarObject;
 import com.example.solarsystem.SolarObjectsAdapter;
 import com.example.solarsystem.databinding.FragmentPlanetsBinding;
+import com.example.solarsystem.ui.moons.MoonsFragment;
 
 import butterknife.BindView;
 
 public class PlanetsFragment extends Fragment implements SolarObjectsAdapter.ISolarObjectClickedListener {
     private final String LOG_KEY = "LOG_KEY@" + this.getClass().getSimpleName();
-    public static final String OBJECT_KEY = "planets";
+    public static final String OBJECT_TYPE = "planets";
+    public static final String OBJECTS_KEY = "planets";
     private FragmentPlanetsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -48,7 +50,13 @@ public class PlanetsFragment extends Fragment implements SolarObjectsAdapter.ISo
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SolarObject[] objects = SolarObject.loadArrayFromJSON(getContext(), this.OBJECT_KEY);
+        SolarObject[] objects;
+        if (getArguments() != null && getArguments().containsKey(this.OBJECTS_KEY)) {
+            objects = (SolarObject[]) getArguments().getSerializable(this.OBJECTS_KEY);
+        } else {
+            objects = SolarObject.loadArrayFromJSON(getContext(), this.OBJECT_TYPE);
+        }
+
         this.binding.objectsRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         SolarObjectsAdapter adapter = new SolarObjectsAdapter(objects);
         adapter.setSolarObjectClickedListener(this);
@@ -58,5 +66,13 @@ public class PlanetsFragment extends Fragment implements SolarObjectsAdapter.ISo
     @Override
     public void solarObjectClicked(SolarObject solarObject) {
         Log.d(this.LOG_KEY, "Clicked: " + solarObject.getName());
+    }
+
+    public static PlanetsFragment newInstance(SolarObject[] objects) {
+        PlanetsFragment fragment = new PlanetsFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(OBJECTS_KEY, objects);
+        fragment.setArguments(args);
+        return fragment;
     }
 }
