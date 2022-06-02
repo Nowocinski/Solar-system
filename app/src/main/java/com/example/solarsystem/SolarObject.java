@@ -1,5 +1,13 @@
 package com.example.solarsystem;
 
+import android.content.Context;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 
 public class SolarObject implements Serializable {
@@ -10,9 +18,18 @@ public class SolarObject implements Serializable {
     private String video;
     private SolarObject[] moons;
 
-    public SolarObject() {
-
+    public SolarObject(JSONObject jsonObject) throws JSONException {
+        this.name = jsonObject.getString("name");
+        this.text = String.format("texts/earth.txt", this.name.toLowerCase())/*String.format("texts/%s.txt", name.toLowerCase())*/;
+        this.image = String.format("images/%s.jpg", name.toLowerCase());
+        this.video = jsonObject.optString("video");
+        this.moons = null;
     }
+
+    public SolarObject[] getMoons() {
+        return moons;
+    }
+
     public SolarObject(String name) {
         this.name = name;
     }
@@ -49,11 +66,36 @@ public class SolarObject implements Serializable {
         this.video = video;
     }
 
-    public SolarObject[] getMoons() {
-        return moons;
-    }
-
     public void setMoons(SolarObject[] moons) {
         this.moons = moons;
+    }
+
+    public static String loadStringFromAssets(Context context, String fileName) throws IOException {
+        InputStream inputStream = context.getAssets().open(fileName);
+        int size = inputStream.available();
+        byte[] buffer = new byte[size];
+        inputStream.read(buffer);
+        inputStream.close();
+        return new String(buffer, "UTF-8");
+    }
+
+    public static SolarObject[] loadArrayFromJSON(Context context, String type) {
+        try {
+            String json = loadStringFromAssets(context, "solar.json");
+            JSONObject jsonObject = new JSONObject(json);
+            JSONArray jsonArray = jsonObject.getJSONArray(type);
+            SolarObject[] solarObjects = new SolarObject[jsonArray.length()];
+            for (int i = 0; i < jsonArray.length(); i++) {
+                SolarObject solarObject = new SolarObject(jsonArray.getJSONObject(i));
+                solarObjects[i] = solarObject;
+            }
+            return solarObjects;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return new SolarObject[0];
     }
 }
