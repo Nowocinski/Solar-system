@@ -3,12 +3,14 @@ package com.example.solarsystem;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.text.HtmlCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.solarsystem.databinding.ActivitySolarObjectBinding;
@@ -55,9 +57,10 @@ public class SolarObjectActivity extends AppCompatActivity {
 
 
         this.solarObject = (SolarObject) getIntent().getSerializableExtra(this.OBJECT_KEY);
+        binding.toolbarLayout.setTitle(this.solarObject.getName());
         try {
             String text = SolarObject.loadStringFromAssets(this, this.solarObject.getText());
-            this.objectTextView.setText(text);
+            this.objectTextView.setText(Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY));
         } catch (IOException e) {
             e.printStackTrace();
         }
