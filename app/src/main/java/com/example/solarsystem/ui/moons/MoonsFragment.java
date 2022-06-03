@@ -1,7 +1,7 @@
 package com.example.solarsystem.ui.moons;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +15,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.solarsystem.MoonsPagerAdapter;
 import com.example.solarsystem.SolarObject;
 import com.example.solarsystem.databinding.FragmentMoonsBinding;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +24,8 @@ public class MoonsFragment extends Fragment {
     public static final String OBJECT_TYPE = "planets";
     private FragmentMoonsBinding binding;
     private ViewPager2 moonsViewPager;
-    private TabLayout moonsTabLayout;
+    //private TabLayout moonsTabLayout;
+    private ITabCallback tabCallback;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,7 +35,7 @@ public class MoonsFragment extends Fragment {
         binding = FragmentMoonsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         this.moonsViewPager = binding.moonsViewPager2;
-        this.moonsTabLayout = binding.moonsTabLayout;
+        //this.moonsTabLayout = binding.moonsTabLayout;
 
         // final TextView textView = binding.textMoons;
         // moonsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
@@ -56,9 +55,10 @@ public class MoonsFragment extends Fragment {
         MoonsPagerAdapter moonsPagerAdapter = new MoonsPagerAdapter(getActivity(), solarObjects);
         this.moonsViewPager.setAdapter(moonsPagerAdapter);
         //this.moonsTabLayout.setupWithViewPager(this.moonsViewPager);
-        new TabLayoutMediator(this.moonsTabLayout, this.moonsViewPager, (tab, position) -> {
+        this.tabCallback.showTabs(this.moonsViewPager, solarObjects);
+        /*new TabLayoutMediator(this.moonsTabLayout, this.moonsViewPager, (tab, position) -> {
             tab.setText(solarObjects[position].getName());
-        }).attach();
+        }).attach();*/
     }
 
     private SolarObject[] objectsWithMoons() {
@@ -70,5 +70,28 @@ public class MoonsFragment extends Fragment {
             }
         }
         return objectsWithMoons.toArray(new SolarObject[0]);
+    }
+
+    public interface ITabCallback {
+        void showTabs(ViewPager2 viewPager2, SolarObject[] solarObjects);
+        void hideTabs();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.tabCallback = (ITabCallback) context;
+    }
+
+    @Override
+    public void onDetach() {
+        this.tabCallback.hideTabs();
+        super.onDetach();
+        this.tabCallback = null;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

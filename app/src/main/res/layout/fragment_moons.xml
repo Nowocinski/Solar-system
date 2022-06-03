@@ -7,11 +7,6 @@
     android:orientation="vertical"
     android:id="@+id/moonsLinearLayout">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/moonsTabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/moonsViewPager2"
         android:layout_width="match_parent"
