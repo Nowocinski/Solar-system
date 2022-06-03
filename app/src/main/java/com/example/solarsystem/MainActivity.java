@@ -1,7 +1,6 @@
 package com.example.solarsystem;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements MoonsFragment.ITa
 
         this.moonsTabLayout = binding.appBarMain.moonsTabLayout;
     }
-    
+
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
