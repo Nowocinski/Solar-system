@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.solarsystem.SolarObject;
+import com.example.solarsystem.SolarObjectActivity;
 import com.example.solarsystem.SolarObjectsAdapter;
 import com.example.solarsystem.databinding.FragmentPlanetsBinding;
 
@@ -24,8 +24,8 @@ public class PlanetsFragment extends Fragment implements SolarObjectsAdapter.ISo
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        PlanetsViewModel planetsViewModel =
-                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(PlanetsViewModel.class);
+        /*PlanetsViewModel planetsViewModel =
+                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(PlanetsViewModel.class);*/
 
         binding = FragmentPlanetsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -61,6 +61,7 @@ public class PlanetsFragment extends Fragment implements SolarObjectsAdapter.ISo
     @Override
     public void solarObjectClicked(SolarObject solarObject) {
         Log.d(this.LOG_KEY, "Clicked: " + solarObject.getName());
+        SolarObjectActivity.start(getActivity(), solarObject);
     }
 
     public static PlanetsFragment newInstance(SolarObject[] objects) {
