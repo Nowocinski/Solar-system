@@ -9,7 +9,8 @@
     tools:showIn="@layout/activity_solar_object">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/objectTextView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:text="@string/large_text" />

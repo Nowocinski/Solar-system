@@ -1,6 +1,5 @@
 package com.example.solarsystem;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +69,7 @@ public class SolarObjectsAdapter extends RecyclerView.Adapter<SolarObjectsAdapte
             this.solarObject = solarObject;
             this.itemTextView.setText(this.solarObject.getName());
             Glide.with(this.itemImageView.getContext())
-                    .load("file:///android_asset/" + this.solarObject.getImage())
+                    .load(this.solarObject.getImagePath())
                     .into(this.itemImageView);
         }
 

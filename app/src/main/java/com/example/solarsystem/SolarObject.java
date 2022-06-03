@@ -104,4 +104,8 @@ public class SolarObject implements Serializable {
         }
         return solarObjects;
     }
+
+    public String getImagePath() {
+        return String.format("file:///android_asset/%s", this.getImage());
+    }
 }
