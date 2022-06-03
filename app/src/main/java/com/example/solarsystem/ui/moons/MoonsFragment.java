@@ -85,13 +85,13 @@ public class MoonsFragment extends Fragment {
 
     @Override
     public void onDetach() {
-        this.tabCallback.hideTabs();
         super.onDetach();
         this.tabCallback = null;
     }
 
     @Override
     public void onDestroy() {
+        this.tabCallback.hideTabs();
         super.onDestroy();
     }
 }
