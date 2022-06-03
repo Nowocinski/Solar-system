@@ -72,7 +72,7 @@ public class SolarObject implements Serializable {
         this.moons = moons;
     }
 
-    private static String loadStringFromAssets(Context context, String fileName) throws IOException {
+    public static String loadStringFromAssets(Context context, String fileName) throws IOException {
         InputStream inputStream = context.getAssets().open(fileName);
         int size = inputStream.available();
         byte[] buffer = new byte[size];

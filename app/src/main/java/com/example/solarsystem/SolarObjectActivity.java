@@ -16,6 +16,8 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
+
 import butterknife.ButterKnife;
 
 public class SolarObjectActivity extends AppCompatActivity {
@@ -51,8 +53,14 @@ public class SolarObjectActivity extends AppCompatActivity {
             }
         });
 
+
         this.solarObject = (SolarObject) getIntent().getSerializableExtra(this.OBJECT_KEY);
-        this.objectTextView.setText(this.solarObject.getText());
+        try {
+            String text = SolarObject.loadStringFromAssets(this, this.solarObject.getText());
+            this.objectTextView.setText(text);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Glide.with(this)
                 .load(this.solarObject.getImagePath())
                 .into(this.objectImageView);
