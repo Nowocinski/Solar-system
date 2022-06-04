@@ -1,15 +1,19 @@
 package com.example.solarsystem;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.text.HtmlCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +22,6 @@ import com.bumptech.glide.Glide;
 import com.example.solarsystem.databinding.ActivitySolarObjectBinding;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 
@@ -52,17 +55,25 @@ public class SolarObjectActivity extends AppCompatActivity implements SolarObjec
         CollapsingToolbarLayout toolBarLayout = binding.toolbarLayout;
         toolBarLayout.setTitle(getTitle());
 
-        FloatingActionButton fab = binding.fab;
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
         this.solarObject = (SolarObject) getIntent().getSerializableExtra(this.OBJECT_KEY);
+
+        FloatingActionButton fab = binding.fab;
+        boolean hasMovie = !TextUtils.isEmpty(this.solarObject.getVideo());
+        if (hasMovie) {
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                            //.setAction("Action", null).show();
+                    showYoutubeVideo(solarObject.getVideo());
+                }
+            });
+        } else {
+            CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) fab.getLayoutParams();
+            lp.setAnchorId(View.NO_ID);
+            fab.setVisibility(View.GONE);
+        }
+
         binding.toolbarLayout.setTitle(this.solarObject.getName());
         try {
             String text = SolarObject.loadStringFromAssets(this, this.solarObject.getText());
@@ -83,6 +94,16 @@ public class SolarObjectActivity extends AppCompatActivity implements SolarObjec
             this.moonsRecyclerView.setAdapter(solarObjectsAdapter);
             this.moonsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             this.moonsRecyclerView.setNestedScrollingEnabled(false);
+        }
+    }
+
+    private void showYoutubeVideo(String video) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + video));
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + video));
+            startActivity(intent);
         }
     }
 
