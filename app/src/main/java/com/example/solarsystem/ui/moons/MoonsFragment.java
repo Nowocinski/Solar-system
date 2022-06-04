@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.solarsystem.MoonsPagerAdapter;
@@ -29,8 +28,8 @@ public class MoonsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        MoonsViewModel moonsViewModel =
-                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MoonsViewModel.class);
+        /*MoonsViewModel moonsViewModel =
+                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MoonsViewModel.class);*/
 
         binding = FragmentMoonsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -65,7 +64,7 @@ public class MoonsFragment extends Fragment {
         SolarObject[] solarObjects = SolarObject.loadArrayFromJSON(getContext(), this.OBJECT_TYPE);
         List<SolarObject> objectsWithMoons = new ArrayList<>();
         for (SolarObject object : solarObjects) {
-            if (object.getMoons() != null && object.getMoons().length != 0) {
+            if (object.hasMoons()) {
                 objectsWithMoons.add(object);
             }
         }

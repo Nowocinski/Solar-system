@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.text.HtmlCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.solarsystem.databinding.ActivitySolarObjectBinding;
@@ -29,6 +31,8 @@ public class SolarObjectActivity extends AppCompatActivity {
     private SolarObject solarObject;
     private TextView objectTextView;
     private ImageView objectImageView;
+    private RecyclerView moonsRecyclerView;
+    private TextView moonsLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,8 @@ public class SolarObjectActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         this.objectTextView = binding.objectContentScrolling.objectTextView;
         this.objectImageView = binding.objectImageView;
+        this.moonsRecyclerView = this.binding.objectContentScrolling.moonsRecyclerView;
+        this.moonsLabel = this.binding.objectContentScrolling.moonsLabel;
 
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
@@ -67,6 +73,15 @@ public class SolarObjectActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(this.solarObject.getImagePath())
                 .into(this.objectImageView);
+
+        this.moonsLabel.setVisibility(this.solarObject.hasMoons() ? View.VISIBLE : View.GONE);
+        this.moonsRecyclerView.setVisibility(this.solarObject.hasMoons() ? View.VISIBLE : View.GONE);
+
+        if (this.solarObject.hasMoons()) {
+            SolarObjectsAdapter solarObjectsAdapter = new SolarObjectsAdapter(this.solarObject.getMoons());
+            this.moonsRecyclerView.setAdapter(solarObjectsAdapter);
+            this.moonsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        }
     }
 
     public static void start(Activity activity, SolarObject solarObject) {

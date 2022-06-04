@@ -11,13 +11,15 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="200dp">
         <ImageView
             android:id="@+id/itemImageView"
             android:background="@android:color/black"
+            android:layout_weight="1"
+            android:layout_height="0dp"
             android:layout_width="match_parent"
             android:adjustViewBounds="true"
-            android:layout_height="wrap_content"/>
+            android:scaleType="centerInside"/>
         <TextView
             android:id="@+id/itemTextView"
             android:layout_width="match_parent"
